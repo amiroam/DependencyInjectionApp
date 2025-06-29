@@ -19,10 +19,10 @@
     {
         private Saw _saw;
 		private Hammer _hammer;
-        public Builder()
-        {
-            _saw = new Saw(); // Builder is responsible for creating its dependencies.
-			_hammer = new Hammer();//Builder is responsible for creating its dependencies.
+        public Builder(Saw saw,Hammer hammer) // Constructor injection is used to inject dependencies into the Builder class.
+		{
+            _saw = saw;
+			_hammer =hammer;
         }
 
         public void BuildHouse()
@@ -35,8 +35,13 @@
         {
             static void Main(string[] args)
             {
-                Console.WriteLine("Hello, World!");
-            }
+                Saw saw = new Saw();
+                Hammer hammer = new Hammer();
+                Builder builder = new Builder(saw, hammer); // Dependencies are injected into the Builder class.
+                builder.BuildHouse(); // Builder uses its dependencies to build a house.
+                Console.WriteLine("House built successfully!");
+				Console.ReadKey();
+			}
         }
     }
 }
